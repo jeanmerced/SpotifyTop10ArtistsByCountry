@@ -1,0 +1,111 @@
+{% block body %}
+<html>
+  <head>
+    <title>Spotify's Top 10 Artists by Country</title>
+    <h1 style="color:white;font-family:arial">Spotify's Top 10 Artists by Country</h1>
+    <h4 style="color:white;font-family:arial">What is it?</h4>
+    <p style="color:white;font-family:arial"> A geochart where each country shows a list of today's Top 10 Artists by total number of plays on Spotify.
+    </p>
+    <h4 style="color:white;font-family:arial">How does it work?</h4>
+    <p style="color:white;font-family:arial"> Python's BeautifulSoup library is used to scrape latest top played songs by country from <a href="https://spotifycharts.com/regional">spotifycharts.com</a>.
+    <br>The data is then used to determine the top 10 artists by calculating the sum of all streams using the first fifty
+    <br>positions out of the Top 200. Today's top 10 highest streamed artists are Spotify's Top 10 Artists by Country.
+    <br>Google Charts is then used to create a geochart and visualize each country and see their respective Top 10 lists.
+    </p>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['geochart']});
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Top 10 Artists', {role: 'tooltip', p:{html:true}}],
+          ['United States', 0, '{{top10['United States']}}'],
+          ['United Kingdom', 0, '{{top10['United Kingdom']}}'],
+          ['Argentina', 0, '{{top10['Argentina']}}'],
+          ['Austria', 0, '{{top10['Austria']}}'],
+          ['Australia', 0, '{{top10['Australia']}}'],
+          ['Belgium', 0, '{{top10['Belgium']}}'],
+          ['Bulgaria', 0, '{{top10['Bulgaria']}}'],
+          ['Bolivia', 0, '{{top10['Bolivia']}}'],
+          ['Brazil', 0, '{{top10['Brazil']}}'],
+          ['Canada', 0,'{{top10['Canada']}}'],
+          ['Switzerland', 0, '{{top10['Switzerland']}}'],
+          ['Chile', 0, '{{top10['Chile']}}'],
+          ['Colombia', 0, '{{top10['Colombia']}}'],
+          ['Costa Rica', 0, '{{top10['Costa Rica']}}'],
+          ['Czech Republic', 0, '{{top10['Czech Republic']}}'],
+          ['Germany', 0, '{{top10['Germany']}}'],
+          ['Denmark', 0, '{{top10['Denmark']}}'],
+          ['Dominican Republic', 0, '{{top10['Dominican Republic']}}'],
+          ['Ecuador', 0, '{{top10['Ecuador']}}'],
+          ['Estonia', 0, '{{top10['Estonia']}}'],
+          ['Spain', 0, '{{top10['Spain']}}'],
+          ['Finland', 0, '{{top10['Finland']}}'],
+          ['France', 0, '{{top10['France']}}'],
+          ['Greece', 0, '{{top10['Greece']}}'],
+          ['Guatemala', 0, '{{top10['Guatemala']}}'],
+          ['Honduras', 0, '{{top10['Honduras']}}'],
+          ['Hungary', 0, '{{top10['Hungary']}}'],
+          ['Indonesia', 0, '{{top10['Indonesia']}}'],
+          ['Ireland', 0, '{{top10['Ireland']}}'],
+          ['Israel', 0, '{{top10['Israel']}}'],
+          ['Iceland', 0, '{{top10['Iceland']}}'],
+          ['Italy', 0, '{{top10['Italy']}}'],
+          ['Japan', 0, '{{top10['Japan']}}'],
+          ['Lithuania', 0, '{{top10['Lithuania']}}'],
+          ['Luxembourg', 0, '{{top10['Luxembourg']}}'],
+          ['Latvia', 0, '{{top10['Latvia']}}'],
+          ['Malta', 0, '{{top10['Malta']}}'],
+          ['Mexico', 0, '{{top10['Mexico']}}'],
+          ['Malaysia', 0, '{{top10['Malaysia']}}'],
+          ['Nicaragua', 0, '{{top10['Nicaragua']}}'],
+          ['Netherlands', 0, '{{top10['Netherlands']}}'],
+          ['Norway', 0, '{{top10['Norway']}}'],
+          ['New Zealand', 0, '{{top10['New Zealand']}}'],
+          ['Panama', 0, '{{top10['Panama']}}'],
+          ['Peru', 0, '{{top10['Peru']}}'],
+          ['Philippines', 0, '{{top10['Philippines']}}'],
+          ['Poland', 0, '{{top10['Poland']}}'],
+          ['Portugal', 0, '{{top10['Portugal']}}'],
+          ['Paraguay', 0, '{{top10['Paraguay']}}'],
+          ['Romania', 0, '{{top10['Romania']}}'],
+          ['Sweeden', 0, '{{top10['Sweeden']}}'],
+          ['Singapore', 0, '{{top10['Singapore']}}'],
+          ['Slovakia', 0, '{{top10['Slovakia']}}'],
+          ['El Salvador', 0, '{{top10['El Salvador']}}'],
+          ['Thailand', 0, '{{top10['Thailand']}}'],
+          ['Turkey', 0, '{{top10['Turkey']}}'],
+          ['Taiwan', 0, '{{top10['Taiwan']}}'],
+          ['Uruguay', 0, '{{top10['Uruguay']}}'],
+          ['Vietnam', 0, '{{top10['Vietnam']}}']
+        ]);
+
+        var options = {
+                        backgroundColor: 'black',
+                        defaultColor: '#1DB954',
+                        datalessRegionColor:'#282828',
+                        keepAspectRatio: true,
+                        legend: 'none',
+                        tooltip: {
+                            isHtml: true
+                        }
+                      };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body style="background-color:black;">
+    <div id="regions_div" style="width: 100%; height: 100%;"></div>
+  </body>
+  <footer>
+      <p style="color:white;font-family:arial;text-align:center">Made by: <a href="https://www.github.com/jeanmerced">Jean Merced</a></p>
+  </footer>
+</html>
+
+{% endblock %}
